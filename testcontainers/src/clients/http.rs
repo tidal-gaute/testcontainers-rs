@@ -169,8 +169,8 @@ impl Http {
             match create_result {
                 Ok(container) => container.id,
                 Err(bollard::errors::Error::DockerResponseServerError {
-                    status_code: 404, ..
-                }) => {
+                        status_code: 404, ..
+                    }) => {
                     {
                         let pull_options = Some(CreateImageOptions {
                             from_image: image.descriptor(),
@@ -216,7 +216,7 @@ impl Http {
         Http {
             inner: Arc::new(Client {
                 command: env::command::<env::Os>().unwrap_or_default(),
-                bollard: Docker::connect_with_http_defaults().unwrap(),
+                bollard: Docker::connect_with_local_defaults().unwrap(),
                 created_networks: RwLock::new(Vec::new()),
             }),
         }
